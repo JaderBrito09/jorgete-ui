@@ -1,0 +1,98 @@
+/* ==========================================================================
+   Jorgete Design System (JDS) — Design Tokens (Light & Dark Theme) v1.2
+   ========================================================================== */
+
+:root, [data-theme="light"] {
+  /* Paleta de Cores Principais */
+  --color-primary-start: #1e3a8a;
+  --color-primary-end: #2563eb;
+  --color-primary-grad: linear-gradient(135deg, var(--color-primary-start) 0%, var(--color-primary-end) 100%);
+  --color-primary-hover: #1d4ed8;
+
+  --color-secondary: #64748b;
+  --color-secondary-bg: #f1f5f9;
+  --color-secondary-hover: #e2e8f0;
+  --color-secondary-text: #334155;
+  --color-secondary-border: #cbd5e1;
+
+  --color-success: #059669;
+  --color-success-hover: #047857;
+
+  --color-critical: #dc2626;
+  --color-critical-hover: #b91c1c;
+
+  /* Superfícies e Linhas (Light) */
+  --bg-app: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-surface-subtle: #f1f5f9;
+  --border-color: #e2e8f0;
+  --border-color-focus: #3b82f6;
+
+  /* Tipografia (Light) */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-inverse: #ffffff;
+
+  /* Geometria e Arredondamento */
+  --radius-xl: 0.75rem;   /* 12px - Cards, Modais, Containers */
+  --radius-lg: 0.5rem;    /* 8px - Botões, Inputs */
+  --radius-full: 9999px;  /* Pills, Badges */
+
+  /* Sombras */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  /* Elementos Específicos */
+  --hitl-box-bg: #f8fafc;
+  --comments-bg: #fffbeb;
+  --comments-border: #fde68a;
+  --comments-text: #92400e;
+
+  /* Control Heights */
+  --splitter-input-min-h: 102px;
+  --splitter-input-h: 112px;
+  --header-height: 64px;
+}
+
+/* ==========================================================================
+   Tema Dark (Ativado por [data-theme="dark"] no <html>)
+   ========================================================================== */
+[data-theme="dark"] {
+  /* Paleta Primária Mantida Vibrante */
+  --color-primary-start: #2563eb;
+  --color-primary-end: #3b82f6;
+  --color-primary-grad: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);
+  --color-primary-hover: #60a5fa;
+
+  --color-secondary-bg: #1e293b;
+  --color-secondary-hover: #334155;
+  --color-secondary-text: #e2e8f0;
+  --color-secondary-border: #475569;
+
+  --color-success: #059669;
+  --color-critical: #dc2626;
+
+  /* Superfícies e Linhas (Dark) */
+  --bg-app: #0f172a;           /* Slate-900 */
+  --bg-surface: #1e293b;       /* Slate-800 */
+  --bg-surface-subtle: #334155;/* Slate-700 */
+  --border-color: #334155;      /* Slate-700 */
+  --border-color-focus: #60a5fa;
+
+  /* Tipografia (Dark) */
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-inverse: #0f172a;
+
+  /* Sombras Dark */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+
+  /* Elementos Específicos Dark */
+  --hitl-box-bg: #0f172a;
+  --comments-bg: #451a03;
+  --comments-border: #78350f;
+  --comments-text: #fef3c7;
+}

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jorgete Design System (JDS) — Protótipo Piloto (Light/Dark Ready) v1.2</title>
+    <!-- Tailwind CSS (Utilitários de Layout) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Estilos Unificados do JDS -->
+    <link rel="stylesheet" href="../css/tokens.css">
+    <link rel="stylesheet" href="../css/buttons.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body class="min-h-screen pb-12 transition-colors duration-200">
+
+    <!-- 1. Unified Header (Com Alternador Light/Dark Integrado) -->
+    <jorgete-header subsystem="Secretaria Slides" user-email="jaderbrito.fernandes@sefaz.mt.gov.br" user-name="Jader Fernandes"></jorgete-header>
+
+    <div class="max-w-7xl mx-auto px-6 pt-6 space-y-8">
+
+        <!-- Banner do Protótipo -->
+        <div class="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 text-white p-5 rounded-xl shadow-md flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl">🎨</span>
+                <div>
+                    <h1 class="text-base font-bold">Jorgete Design System (JDS) — Protótipo de Unificação Visual</h1>
+                    <p class="text-xs text-blue-200">Demonstração das diretrizes visuais e alternador de tema (Light/Dark) para todo o ecossistema.</p>
+                </div>
+            </div>
+            <span class="bg-blue-800/80 text-blue-100 text-xs font-semibold px-3 py-1 rounded-full border border-blue-700">Versão 1.2</span>
+        </div>
+
+        <!-- 2. Navegação em Abas (rounded-xl) -->
+        <div class="flex items-center justify-between">
+            <div class="jorgete-tabs">
+                <button class="tab-item active">Visão Geral</button>
+                <button class="tab-item">Minhas Apresentações</button>
+                <button class="tab-item">Rascunhos Pelo HITL</button>
+                <button class="tab-item">Acervo Institucional</button>
+            </div>
+            <div class="text-xs text-slate-400 font-medium">
+                Última sincronização: Hoje às 10:45
+            </div>
+        </div>
+
+        <!-- 3. Galeria dos 4 Botões Padronizados -->
+        <div class="bg-surface p-5 rounded-xl border border-slate-200/20 shadow-sm space-y-3" style="background-color: var(--bg-surface); border: 1px solid var(--border-color);">
+            <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Padronização de Botões de Ação (Adaptáveis ao Tema)</h2>
+            <div class="flex flex-wrap items-center gap-4">
+                <button class="btn btn-primary">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    Ação Primária (Gradiente Safira)
+                </button>
+                <button class="btn btn-secondary">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    Ação Secundária (Neutro)
+                </button>
+                <button class="btn btn-success">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    Sucesso / Aprovação
+                </button>
+                <button class="btn btn-critical">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    Ação Crítica / Excluir
+                </button>
+            </div>
+        </div>
+
+        <!-- Layout Grid: Tabela + Card HITL -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+            <!-- Coluna Esquerda: TableContainer com thead fixo -->
+            <div class="lg:col-span-7 space-y-4">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-base font-bold">Listagem de Documentos e Minutas</h2>
+                    <span class="text-xs text-slate-400 font-semibold">Exibindo 4 registros</span>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-scroll">
+                        <table class="jorgete-table">
+                            <thead>
+                                <tr>
+                                    <th>Documento / Minuta</th>
+                                    <th>Módulo</th>
+                                    <th>Status</th>
+                                    <th class="text-right">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-medium">
+                                        <div>Relatório Trimestral de Metas</div>
+                                        <div class="text-xs text-slate-400">DEM-104 • Criado há 10 min</div>
+                                    </td>
+                                    <td><span class="text-xs font-semibold px-2 py-1 rounded bg-slate-200/50 text-slate-700">Slides</span></td>
+                                    <td><span class="text-xs font-bold text-amber-700 bg-amber-100 dark:bg-amber-900/60 dark:text-amber-300 px-2.5 py-1 rounded-full">Rascunho</span></td>
+                                    <td class="text-right">
+                                        <button class="btn btn-secondary btn-sm">Abrir</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">
+                                        <div>Ata de Reunião Colegiada</div>
+                                        <div class="text-xs text-slate-400">DEM-102 • Criado ontem</div>
+                                    </td>
+                                    <td><span class="text-xs font-semibold px-2 py-1 rounded bg-slate-200/50 text-slate-700">Google</span></td>
+                                    <td><span class="text-xs font-bold text-emerald-700 bg-emerald-100 dark:bg-emerald-900/60 dark:text-emerald-300 px-2.5 py-1 rounded-full">Aprovado</span></td>
+                                    <td class="text-right">
+                                        <button class="btn btn-secondary btn-sm">Visualizar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">
+                                        <div>Apresentação Diretoria Executiva</div>
+                                        <div class="text-xs text-slate-400">DEM-099 • Criado há 2 dias</div>
+                                    </td>
+                                    <td><span class="text-xs font-semibold px-2 py-1 rounded bg-slate-200/50 text-slate-700">Slides</span></td>
+                                    <td><span class="text-xs font-bold text-emerald-700 bg-emerald-100 dark:bg-emerald-900/60 dark:text-emerald-300 px-2.5 py-1 rounded-full">Aprovado</span></td>
+                                    <td class="text-right">
+                                        <button class="btn btn-secondary btn-sm">Visualizar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">
+                                        <div>Minuta de Portaria Conjunta</div>
+                                        <div class="text-xs text-slate-400">DEM-088 • Criado há 5 dias</div>
+                                    </td>
+                                    <td><span class="text-xs font-semibold px-2 py-1 rounded bg-slate-200/50 text-slate-700">Site</span></td>
+                                    <td><span class="text-xs font-bold text-slate-600 bg-slate-200 dark:bg-slate-700 dark:text-slate-300 px-2.5 py-1 rounded-full">Arquivado</span></td>
+                                    <td class="text-right">
+                                        <button class="btn btn-secondary btn-sm">Restaurar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Input Splitter Padrão (Min-h 102px) -->
+                <div class="p-5 rounded-xl border shadow-sm space-y-2" style="background-color: var(--bg-surface); border-color: var(--border-color);">
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider">Novo Requerimento ou Ajuste de Rascunho</label>
+                    <textarea class="splitter-input" placeholder="Descreva as instruções de ajuste para a apresentação ou minuta..."></textarea>
+                    <div class="flex justify-end gap-2 pt-1">
+                        <button class="btn btn-secondary btn-sm">Limpar</button>
+                        <button class="btn btn-primary btn-sm">Processar Pedido</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coluna Direita: HITL Universal Card -->
+            <div class="lg:col-span-5 space-y-4">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-base font-bold">Card HITL (Rascunho Interativo)</h2>
+                    <span class="text-xs text-slate-400 font-semibold">DEM-104</span>
+                </div>
+
+                <div class="hitl-card">
+                    <!-- Cabecalho do Card -->
+                    <div class="hitl-header">
+                        <span class="hitl-badge hitl-badge-draft">
+                            <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                            Rascunho Pendente de Revisão
+                        </span>
+                        <button class="btn btn-secondary btn-sm js-btn-edit">
+                            ✏️ Editar Texto
+                        </button>
+                    </div>
+
+                    <!-- Conteudo do Rascunho (Preserva Newlines) -->
+                    <div>
+                        <div class="hitl-content-box">Prezado Gestor,
+
+Apresentamos a minuta com os principais pontos do Relatório Trimestral:
+1. Avanço de 18% no cronograma das metas estratégicas.
+2. Integração bem-sucedida entre os subsistemas da Secretaria.
+3. Próxima entrega agendada para a próxima sexta-feira.
+
+Atenciosamente,
+Equipe de Gestão.</div>
+                        <textarea class="hitl-editor hidden" rows="6"></textarea>
+                    </div>
+
+                    <!-- Gaveta de Comentarios e Refinamento -->
+                    <div class="comments-drawer">
+                        <div class="flex items-center justify-between font-bold">
+                            <span>Anotações e Comentários Pendentes (<span class="js-comments-count">0</span>)</span>
+                            <span class="text-xs font-normal opacity-90">Comentários bloqueiam o envio</span>
+                        </div>
+
+                        <!-- Lista Dinamica de Comentarios -->
+                        <div class="js-comments-list space-y-1"></div>
+
+                        <!-- Add Comentario -->
+                        <div class="flex gap-2 pt-1">
+                            <input type="text" class="js-comment-input w-full px-2.5 py-1.5 text-xs bg-surface border border-amber-300 rounded outline-none focus:border-amber-600 dark:bg-slate-900 dark:text-slate-100" placeholder="Digite uma instrução de correção...">
+                            <button class="btn btn-secondary btn-sm js-btn-add-comment bg-amber-100 hover:bg-amber-200 text-amber-900 border-amber-300 dark:bg-amber-900 dark:text-amber-100 dark:border-amber-700">
+                                + Anotar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Botões de Ação do HITL -->
+                    <div class="pt-2 border-t border-slate-200/20 flex items-center justify-between gap-3">
+                        <button class="btn btn-critical btn-sm">
+                            Reprovar
+                        </button>
+                        <div class="flex gap-2">
+                            <button class="btn btn-secondary btn-sm">
+                                Salvar Rascunho
+                            </button>
+                            <button class="btn btn-primary btn-sm js-btn-primary">
+                                ✓ Aprovar e Enviar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card de Instruções sobre o HITL -->
+                <div class="p-4 rounded-xl border text-xs text-slate-400 space-y-2" style="background-color: var(--bg-surface-subtle); border-color: var(--border-color);">
+                    <div class="font-bold text-slate-300 flex items-center gap-1.5">
+                        <span>💡</span> Suporte Completo ao Tema Dark/Light:
+                    </div>
+                    <ul class="list-disc pl-4 space-y-1">
+                        <li>Clique no botão <b>☀️ Claro / 🌙 Escuro</b> no topo do Header para alternar.</li>
+                        <li>Sua escolha fica salva automaticamente no navegador (`localStorage`).</li>
+                        <li>Todos os componentes (Tabelas, Inputs, Cards HITL) adaptam o contraste instantaneamente.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Scripts de Interatividade do JDS -->
+    <script src="../js/unified-header.js"></script>
+    <script src="../js/hitl-card.js"></script>
+</body>
+</html>
