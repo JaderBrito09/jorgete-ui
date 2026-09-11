@@ -74,6 +74,12 @@ O **Jorgete Design System (JDS)** é a especificação unificada de UI/UX para t
 ### G. Splitter Inputs (Prompts & Entradas)
 * **Dimensão:** `min-height: 102px` / `height: 112px`, `rounded-lg`, borda Slate-200 com foco em Azul `#3b82f6`.
 
+### H. Sidebars Retráteis & Painéis Laterais (Padrão jorgete-google v1.2)
+* **Acionamento no Header:** Botão discreto de alternância no Unified Header (`button onclick="toggleSidePanel()"`) com ícone `columns` ou `layers`.
+* **Botão 'X' no Cabeçalho da Sidebar:** Todo painel lateral retrátil possui um botão de fechar no topo com ícone `X` (`button onclick="toggleSidePanel()"`).
+* **Comportamento de Transição:** O painel alterna sua visibilidade (`hidden` / `w-80` <-> `w-0` com `transition-all duration-300`), permitindo que a área útil do Canvas e do Chat se expanda suavemente e ocupe 100% da viewport central.
+* **Proibição de Elementos Flutuantes:** É estritamente proibido colocar botões soltos ou chevrons flutuantes no meio da área central do Canvas para recolher painéis.
+
 ---
 
 ## 5. Estrutura de Arquivos Central (`jorgete-ui`)
