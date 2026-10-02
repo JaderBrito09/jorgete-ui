@@ -1,0 +1,36 @@
+name: CI - Jorgete Design System
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-validate:
+    name: Build & Validate Assets
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build CSS Bundle
+        run: npm run build
+
+      - name: Verify CSS Output Exists
+        run: |
+          if [ ! -f "css/jorgete-ui.min.css" ]; then
+            echo "❌ Erro: css/jorgete-ui.min.css não foi gerado!"
+            exit 1
+          fi
+          echo "✅ Bundle css/jorgete-ui.min.css gerado com sucesso."

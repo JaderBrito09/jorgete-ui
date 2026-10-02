@@ -1,240 +1,442 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="light">
+<html lang="pt-BR" data-theme="jorgete">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jorgete Design System (JDS) — Protótipo Piloto (Light/Dark Ready) v1.2</title>
-    <!-- Tailwind CSS (Utilitários de Layout) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Estilos Unificados do JDS -->
-    <link rel="stylesheet" href="../css/tokens.css">
-    <link rel="stylesheet" href="../css/buttons.css">
-    <link rel="stylesheet" href="../css/components.css">
+    <title>Estação de Governança Executiva — Jorgete Design System v2.1</title>
+    <!-- Estilo Unificado Compilado do JDS -->
+    <link rel="stylesheet" href="../css/jorgete-ui.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 </head>
-<body class="min-h-screen pb-12 transition-colors duration-200">
+<body class="bg-base-200 text-base-content min-h-screen flex flex-col font-sans antialiased">
 
-    <!-- 1. Unified Header (Com Alternador Light/Dark Integrado) -->
-    <jorgete-header subsystem="Secretaria Slides" user-email="jaderbrito.fernandes@sefaz.mt.gov.br" user-name="Jader Fernandes"></jorgete-header>
-
-    <div class="max-w-7xl mx-auto px-6 pt-6 space-y-8">
-
-        <!-- Banner do Protótipo -->
-        <div class="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 text-white p-5 rounded-xl shadow-md flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <span class="text-2xl">🎨</span>
-                <div>
-                    <h1 class="text-base font-bold">Jorgete Design System (JDS) — Protótipo de Unificação Visual</h1>
-                    <p class="text-xs text-blue-200">Demonstração das diretrizes visuais e alternador de tema (Light/Dark) para todo o ecossistema.</p>
+    <!-- 1. HEADER UNIFICADO (UNIFIED HEADER) -->
+    <header class="navbar bg-base-100 border-b border-base-300 px-6 h-16 sticky top-0 z-50 shadow-tactile">
+        <div class="flex-1 items-center gap-3">
+            <!-- Brand Logo Jorgete AI -->
+            <a href="#" class="flex items-center gap-2.5 font-heading font-extrabold text-lg tracking-tight text-base-content hover:opacity-90 transition-opacity">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary via-accent to-blue-600 flex items-center justify-center text-white font-black text-xl shadow-sm">
+                    J
                 </div>
-            </div>
-            <span class="bg-blue-800/80 text-blue-100 text-xs font-semibold px-3 py-1 rounded-full border border-blue-700">Versão 1.2</span>
-        </div>
+                <span>Jorgete <span class="text-primary font-bold">Executive</span></span>
+            </a>
 
-        <!-- 2. Navegação em Abas (rounded-xl) -->
-        <div class="flex items-center justify-between">
-            <div class="jorgete-tabs">
-                <button class="tab-item active">Visão Geral</button>
-                <button class="tab-item">Minhas Apresentações</button>
-                <button class="tab-item">Rascunhos Pelo HITL</button>
-                <button class="tab-item">Acervo Institucional</button>
-            </div>
-            <div class="text-xs text-slate-400 font-medium">
-                Última sincronização: Hoje às 10:45
-            </div>
-        </div>
+            <div class="divider divider-horizontal my-3 mx-1"></div>
 
-        <!-- 3. Galeria dos 4 Botões Padronizados -->
-        <div class="bg-surface p-5 rounded-xl border border-slate-200/20 shadow-sm space-y-3" style="background-color: var(--bg-surface); border: 1px solid var(--border-color);">
-            <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Padronização de Botões de Ação (Adaptáveis ao Tema)</h2>
-            <div class="flex flex-wrap items-center gap-4">
-                <button class="btn btn-primary">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                    Ação Primária (Gradiente Safira)
-                </button>
-                <button class="btn btn-secondary">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    Ação Secundária (Neutro)
-                </button>
-                <button class="btn btn-success">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                    Sucesso / Aprovação
-                </button>
-                <button class="btn btn-critical">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                    Ação Crítica / Excluir
-                </button>
+            <!-- Selector de Módulo / Subsistema -->
+            <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-sm btn-ghost gap-2 border border-base-300/80 rounded-xl font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-success"></span>
+                    <span id="current-subsystem">Studio de Governança</span>
+                    <svg class="w-4 h-4 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </div>
+                <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow-2xl bg-base-100 rounded-2xl w-60 border border-base-300 mt-2">
+                    <li class="menu-title text-[11px] font-bold uppercase tracking-wider text-base-content/50 font-mono">Módulos do Ecossistema</li>
+                    <li><a onclick="switchModule('Studio de Governança')" class="py-2 rounded-xl font-medium">📋 Studio de Governança</a></li>
+                    <li><a onclick="switchModule('Assistente Google Chat')" class="py-2 rounded-xl font-medium">💬 Assistente Google Chat</a></li>
+                    <li><a onclick="switchModule('Secretária GWS')" class="py-2 rounded-xl font-medium">🤖 Secretária GWS</a></li>
+                    <li><a onclick="switchModule('Portal Hub')" class="py-2 rounded-xl font-medium">🌐 Portal Hub Corporativo</a></li>
+                </ul>
             </div>
         </div>
 
-        <!-- Layout Grid: Tabela + Card HITL -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Controles do Lado Direito -->
+        <div class="flex-none flex items-center gap-2.5">
+            <!-- Alternador de Painel Lateral de Governança -->
+            <button onclick="toggleSidebar()" class="btn btn-ghost btn-circle btn-sm" title="Alternar Painel de Governança">
+                <svg class="w-5 h-5 text-base-content/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 002-2h-2a2 2 0 00-2 2"/></svg>
+            </button>
 
-            <!-- Coluna Esquerda: TableContainer com thead fixo -->
-            <div class="lg:col-span-7 space-y-4">
-                <div class="flex items-center justify-between">
-                    <h2 class="text-base font-bold">Listagem de Documentos e Minutas</h2>
-                    <span class="text-xs text-slate-400 font-semibold">Exibindo 4 registros</span>
-                </div>
+            <!-- Alternador de Tema Light/Dark -->
+            <button onclick="toggleTheme()" class="btn btn-ghost btn-circle btn-sm" title="Alternar Tema (Light/Dark)">
+                <svg id="theme-icon-sun" class="w-5 h-5 text-warning hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                <svg id="theme-icon-moon" class="w-5 h-5 text-base-content/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+            </button>
 
-                <div class="table-container">
-                    <div class="table-scroll">
-                        <table class="jorgete-table">
-                            <thead>
-                                <tr>
-                                    <th>Documento / Minuta</th>
-                                    <th>Módulo</th>
-                                    <th>Status</th>
-                                    <th class="text-right">Ação</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="font-medium">
-                                        <div>Relatório Trimestral de Metas</div>
-                                        <div class="text-xs text-slate-400">DEM-104 • Criado há 10 min</div>
-                                    </td>
-                                    <td><span class="text-xs font-semibold px-2 py-1 rounded bg-slate-200/50 text-slate-700">Slides</span></td>
-                                    <td><span class="text-xs font-bold text-amber-700 bg-amber-100 dark:bg-amber-900/60 dark:text-amber-300 px-2.5 py-1 rounded-full">Rascunho</span></td>
-                                    <td class="text-right">
-                                        <button class="btn btn-secondary btn-sm">Abrir</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-medium">
-                                        <div>Ata de Reunião Colegiada</div>
-                                        <div class="text-xs text-slate-400">DEM-102 • Criado ontem</div>
-                                    </td>
-                                    <td><span class="text-xs font-semibold px-2 py-1 rounded bg-slate-200/50 text-slate-700">Google</span></td>
-                                    <td><span class="text-xs font-bold text-emerald-700 bg-emerald-100 dark:bg-emerald-900/60 dark:text-emerald-300 px-2.5 py-1 rounded-full">Aprovado</span></td>
-                                    <td class="text-right">
-                                        <button class="btn btn-secondary btn-sm">Visualizar</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-medium">
-                                        <div>Apresentação Diretoria Executiva</div>
-                                        <div class="text-xs text-slate-400">DEM-099 • Criado há 2 dias</div>
-                                    </td>
-                                    <td><span class="text-xs font-semibold px-2 py-1 rounded bg-slate-200/50 text-slate-700">Slides</span></td>
-                                    <td><span class="text-xs font-bold text-emerald-700 bg-emerald-100 dark:bg-emerald-900/60 dark:text-emerald-300 px-2.5 py-1 rounded-full">Aprovado</span></td>
-                                    <td class="text-right">
-                                        <button class="btn btn-secondary btn-sm">Visualizar</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-medium">
-                                        <div>Minuta de Portaria Conjunta</div>
-                                        <div class="text-xs text-slate-400">DEM-088 • Criado há 5 dias</div>
-                                    </td>
-                                    <td><span class="text-xs font-semibold px-2 py-1 rounded bg-slate-200/50 text-slate-700">Site</span></td>
-                                    <td><span class="text-xs font-bold text-slate-600 bg-slate-200 dark:bg-slate-700 dark:text-slate-300 px-2.5 py-1 rounded-full">Arquivado</span></td>
-                                    <td class="text-right">
-                                        <button class="btn btn-secondary btn-sm">Restaurar</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+            <!-- Perfil SSO -->
+            <div class="dropdown dropdown-end">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar placeholder">
+                    <div class="bg-primary text-primary-content rounded-full w-9 shadow-tactile">
+                        <span class="text-xs font-mono font-bold">JB</span>
                     </div>
                 </div>
-
-                <!-- Input Splitter Padrão (Min-h 102px) -->
-                <div class="p-5 rounded-xl border shadow-sm space-y-2" style="background-color: var(--bg-surface); border-color: var(--border-color);">
-                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider">Novo Requerimento ou Ajuste de Rascunho</label>
-                    <textarea class="splitter-input" placeholder="Descreva as instruções de ajuste para a apresentação ou minuta..."></textarea>
-                    <div class="flex justify-end gap-2 pt-1">
-                        <button class="btn btn-secondary btn-sm">Limpar</button>
-                        <button class="btn btn-primary btn-sm">Processar Pedido</button>
-                    </div>
-                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2.5 shadow-2xl bg-base-100 rounded-2xl w-60 border border-base-300">
+                    <li class="px-3 py-2 border-b border-base-200 mb-1">
+                        <span class="font-bold text-sm block p-0 text-base-content">Jader Brito</span>
+                        <span class="text-xs text-base-content/60 block p-0 font-normal">jader@jorgete.cloud</span>
+                    </li>
+                    <li><a class="py-2 rounded-xl">🌐 Ir para o Portal Hub</a></li>
+                    <li><a class="py-2 rounded-xl">📁 Pasta no Google Drive</a></li>
+                    <li><a class="py-2 rounded-xl text-error font-semibold">🚪 Sair</a></li>
+                </ul>
             </div>
+        </div>
+    </header>
 
-            <!-- Coluna Direita: HITL Universal Card -->
-            <div class="lg:col-span-5 space-y-4">
-                <div class="flex items-center justify-between">
-                    <h2 class="text-base font-bold">Card HITL (Rascunho Interativo)</h2>
-                    <span class="text-xs text-slate-400 font-semibold">DEM-104</span>
+    <!-- BARRA SUPERIOR DE NAVEGAÇÃO E ATALHOS -->
+    <section class="bg-base-100 border-b border-base-300 px-6 py-2.5 flex flex-col md:flex-row items-center justify-between gap-3">
+        <div class="tabs tabs-boxed bg-base-200 p-1 rounded-xl border border-base-300 gap-1 w-full md:w-auto">
+            <button onclick="switchTab('tab-dossier')" id="btn-tab-dossier" class="tab tab-active bg-base-100 text-primary font-bold shadow-xs rounded-lg px-4 text-xs">
+                📄 Dossiê & Pautas Ativas
+            </button>
+            <button onclick="switchTab('tab-chat')" id="btn-tab-chat" class="tab text-base-content/70 font-semibold hover:text-base-content rounded-lg px-4 text-xs">
+                💬 Despachos & Chatbot
+            </button>
+            <button onclick="switchTab('tab-audit')" id="btn-tab-audit" class="tab text-base-content/70 font-semibold hover:text-base-content rounded-lg px-4 text-xs">
+                📊 Trilha de Auditoria (DEMs)
+            </button>
+        </div>
+
+        <div class="flex items-center gap-2 w-full md:w-auto justify-end">
+            <span class="badge badge-success text-white font-mono font-semibold text-[11px] px-2.5 py-2">
+                ● JDS v2.1 Executive
+            </span>
+            <button class="btn btn-primary btn-sm rounded-xl font-heading shadow-tactile">
+                ⚡ Homologar Pauta
+            </button>
+        </div>
+    </section>
+
+    <!-- ÁREA DE CONTEÚDO PRINCIPAL (ESTAÇÃO DE TRABALHO DE 3 COLUNAS) -->
+    <main class="flex-1 flex overflow-hidden relative">
+
+        <!-- ABA 1: DOSSIÊ EXECUTIVO & PAUTAS (3 COLUNAS) -->
+        <div id="tab-dossier" class="tab-content flex-1 flex w-full h-full overflow-hidden">
+            
+            <!-- COLUNA 1: AGENDA & FILA DE DEMANDAS (ESQUERDA - 280px) -->
+            <aside class="w-72 bg-base-100 border-r border-base-300 flex flex-col shrink-0 overflow-y-auto custom-scrollbar p-3 space-y-3">
+                <div class="flex items-center justify-between px-2 pt-1">
+                    <span class="font-heading font-bold text-xs uppercase tracking-wider text-base-content/60">Pautas do Dia</span>
+                    <span class="badge badge-sm badge-ghost font-mono">3 pendentes</span>
                 </div>
 
-                <div class="hitl-card">
-                    <!-- Cabecalho do Card -->
-                    <div class="hitl-header">
-                        <span class="hitl-badge hitl-badge-draft">
-                            <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
-                            Rascunho Pendente de Revisão
-                        </span>
-                        <button class="btn btn-secondary btn-sm js-btn-edit">
-                            ✏️ Editar Texto
-                        </button>
+                <!-- Lista de Cards da Fila de Pautas -->
+                <div class="space-y-2">
+                    <div class="p-3 rounded-xl bg-primary/10 border border-primary/30 cursor-pointer shadow-xs">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="badge badge-warning badge-xs font-bold text-[10px]">Minuta Aberta</span>
+                            <span class="font-mono text-[10px] text-base-content/60">09:30</span>
+                        </div>
+                        <h4 class="font-heading font-bold text-xs text-base-content">Alinhamento Arquitetural JDS</h4>
+                        <p class="text-[11px] text-base-content/70 line-clamp-2 mt-0.5">Validação das diretrizes de contraste e barras executivas.</p>
                     </div>
 
-                    <!-- Conteudo do Rascunho (Preserva Newlines) -->
-                    <div>
-                        <div class="hitl-content-box">Prezado Gestor,
-
-Apresentamos a minuta com os principais pontos do Relatório Trimestral:
-1. Avanço de 18% no cronograma das metas estratégicas.
-2. Integração bem-sucedida entre os subsistemas da Secretaria.
-3. Próxima entrega agendada para a próxima sexta-feira.
-
-Atenciosamente,
-Equipe de Gestão.</div>
-                        <textarea class="hitl-editor hidden" rows="6"></textarea>
+                    <div class="p-3 rounded-xl bg-base-200/60 hover:bg-base-200 border border-base-300 cursor-pointer transition-colors">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="badge badge-success text-white badge-xs font-bold text-[10px]">Homologado</span>
+                            <span class="font-mono text-[10px] text-base-content/60">Ontem</span>
+                        </div>
+                        <h4 class="font-heading font-bold text-xs text-base-content">Sincronização Google Workspace</h4>
+                        <p class="text-[11px] text-base-content/70 line-clamp-2 mt-0.5">Estruturação de credenciais e permissões no Drive.</p>
                     </div>
 
-                    <!-- Gaveta de Comentarios e Refinamento -->
-                    <div class="comments-drawer">
-                        <div class="flex items-center justify-between font-bold">
-                            <span>Anotações e Comentários Pendentes (<span class="js-comments-count">0</span>)</span>
-                            <span class="text-xs font-normal opacity-90">Comentários bloqueiam o envio</span>
+                    <div class="p-3 rounded-xl bg-base-200/60 hover:bg-base-200 border border-base-300 cursor-pointer transition-colors">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="badge badge-ghost badge-xs font-bold text-[10px]">Agendado</span>
+                            <span class="font-mono text-[10px] text-base-content/60">14:00</span>
+                        </div>
+                        <h4 class="font-heading font-bold text-xs text-base-content">Revisão do Backlog DEM-UI</h4>
+                        <p class="text-[11px] text-base-content/70 line-clamp-2 mt-0.5">Consolidação do buffer de engenharia e deploy VPS.</p>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- COLUNA 2: CANVAS CENTRAL / DOSSIÊ EM REDAÇÃO (CENTRO EXPANSÍVEL) -->
+            <div class="flex-1 bg-base-200/70 p-6 flex flex-col justify-between overflow-y-auto custom-scrollbar space-y-4">
+                
+                <!-- Barra de Comando Executivo Global (⌘K) -->
+                <jorgete-command-bar placeholder="Digite um comando executivo ou pesquise no acervo... (⌘K)"></jorgete-command-bar>
+
+                <!-- Dossiê / Minuta Central Ativa -->
+                <div class="executive-card p-6 relative overflow-hidden flex-1 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <!-- Cabeçalho do Dossiê -->
+                        <div class="flex flex-col md:flex-row justify-between md:items-center gap-2 pb-4 border-b border-base-300/80">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="badge badge-warning font-mono font-bold text-xs px-2.5 py-1">DEM-UI-05</span>
+                                    <span class="text-xs text-base-content/50 font-mono">Dossiê #2026-088</span>
+                                </div>
+                                <h2 class="text-2xl font-heading font-extrabold text-base-content tracking-tight">
+                                    Minuta de Diretrizes: Identidade Autoral JDS v2.1
+                                </h2>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs text-base-content/60 font-mono">Secretária: Jorgete AI</span>
+                                <span class="w-2 h-2 rounded-full bg-success"></span>
+                            </div>
                         </div>
 
-                        <!-- Lista Dinamica de Comentarios -->
-                        <div class="js-comments-list space-y-1"></div>
-
-                        <!-- Add Comentario -->
-                        <div class="flex gap-2 pt-1">
-                            <input type="text" class="js-comment-input w-full px-2.5 py-1.5 text-xs bg-surface border border-amber-300 rounded outline-none focus:border-amber-600 dark:bg-slate-900 dark:text-slate-100" placeholder="Digite uma instrução de correção...">
-                            <button class="btn btn-secondary btn-sm js-btn-add-comment bg-amber-100 hover:bg-amber-200 text-amber-900 border-amber-300 dark:bg-amber-900 dark:text-amber-100 dark:border-amber-700">
-                                + Anotar
-                            </button>
+                        <!-- Corpo Editorial do Dossiê -->
+                        <div class="prose max-w-none text-sm leading-relaxed text-base-content/90 space-y-3">
+                            <p>
+                                <strong>Objetivo Estratégico:</strong> Estabelecer o padrão visual autoral da Jorgete Cloud, eliminando elementos clichês de IA e adotando tipografia executiva de alta precisão (Plus Jakarta Sans + JetBrains Mono) e micro-bordas táteis.
+                            </p>
+                            <div class="p-3 bg-base-200/60 rounded-xl border border-base-300 text-xs space-y-1">
+                                <div class="font-bold text-primary font-heading">📌 Pontos Deliberados para Homologação:</div>
+                                <ul class="list-disc list-inside text-base-content/80 space-y-0.5">
+                                    <li>Implementação da Barra de Comandos Executivos com atalho global <code>⌘K</code>.</li>
+                                    <li>Contraste visual rigoroso em conformidade estrita com a norma WCAG 2.2 AA.</li>
+                                    <li>Trava de segurança que impede a aprovação automática existindo ressalvas pendentes do analista.</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Botões de Ação do HITL -->
-                    <div class="pt-2 border-t border-slate-200/20 flex items-center justify-between gap-3">
-                        <button class="btn btn-critical btn-sm">
-                            Reprovar
+                    <!-- Rodapé de Metadados e Trilha -->
+                    <div class="pt-4 mt-4 border-t border-base-300/80 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-base-content/60">
+                        <span class="font-mono">Última edição: Há 4 minutos por Jader Brito</span>
+                        <div class="flex items-center gap-2">
+                            <span class="badge badge-ghost badge-sm">Sincronizado com Google Drive</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUNA 3: PAINEL DE GOVERNANÇA HITL RETRÁTIL (DIREITA - 384px) -->
+            <aside id="sidebar-governance" class="w-96 bg-base-100 border-l border-base-300 flex flex-col shrink-0 overflow-y-auto custom-scrollbar sidebar-transition p-5 space-y-4">
+                
+                <div class="flex justify-between items-center pb-3 border-b border-base-300">
+                    <h3 class="font-heading font-bold text-sm text-base-content flex items-center gap-2">
+                        🛡️ Governança & Decisão
+                    </h3>
+                    <button onclick="toggleSidebar()" class="btn btn-ghost btn-xs btn-circle" title="Fechar Painel">✕</button>
+                </div>
+
+                <!-- Card HITL com Trava de Segurança e Comentários -->
+                <div class="hitl-card executive-card p-4 space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="badge badge-warning font-bold text-xs">Pendente de Homologação</span>
+                        <span class="font-mono text-[11px] text-base-content/60">Ressalvas: <b class="js-comments-count text-error">0</b></span>
+                    </div>
+
+                    <div class="hitl-content-box p-3 bg-base-200/50 rounded-xl border border-base-300 text-xs text-base-content/80 leading-relaxed">
+                        Autorizo a publicação imediata do bundle compilado v2.1 no repositório central e a sincronização com os subprojetos.
+                    </div>
+                    <textarea class="hitl-editor textarea textarea-bordered w-full text-xs hidden" rows="3"></textarea>
+
+                    <!-- Gaveta de Comentários / Ressalvas do Analista -->
+                    <div class="space-y-1.5 pt-1">
+                        <label class="text-[11px] font-bold text-base-content/70">Registrar Ressalva ou Ponto de Atenção:</label>
+                        <div class="flex gap-1.5">
+                            <input type="text" class="js-comment-input input input-bordered input-xs flex-1 text-xs" placeholder="Ex: Ajustar padding da tabela...">
+                            <button type="button" class="js-btn-add-comment btn btn-secondary btn-xs rounded-lg">Inserir</button>
+                        </div>
+                        <div class="js-comments-list flex flex-col gap-1.5 mt-2"></div>
+                    </div>
+
+                    <!-- Botoeira de Governança -->
+                    <div class="flex flex-col gap-2 pt-2 border-t border-base-300">
+                        <button type="button" class="js-btn-primary btn btn-success text-white btn-sm rounded-xl font-heading shadow-tactile w-full">
+                            ✅ Aprovar Minuta & Despachar
                         </button>
                         <div class="flex gap-2">
-                            <button class="btn btn-secondary btn-sm">
-                                Salvar Rascunho
+                            <button type="button" class="js-btn-edit btn btn-secondary btn-outline btn-xs flex-1 rounded-lg">
+                                ✏️ Editar Texto
                             </button>
-                            <button class="btn btn-primary btn-sm js-btn-primary">
-                                ✓ Aprovar e Enviar
+                            <button type="button" class="btn btn-error btn-outline btn-xs rounded-lg">
+                                🗑️ Rejeitar
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Card de Instruções sobre o HITL -->
-                <div class="p-4 rounded-xl border text-xs text-slate-400 space-y-2" style="background-color: var(--bg-surface-subtle); border-color: var(--border-color);">
-                    <div class="font-bold text-slate-300 flex items-center gap-1.5">
-                        <span>💡</span> Suporte Completo ao Tema Dark/Light:
+                <!-- Histórico de Decisões Homologadas -->
+                <div class="space-y-2 pt-2">
+                    <span class="font-heading font-bold text-xs uppercase tracking-wider text-base-content/50">Trilha de Decisões</span>
+                    <div class="p-2.5 bg-base-200/40 rounded-xl border border-base-300 text-xs space-y-1">
+                        <div class="flex justify-between items-center text-[11px] text-base-content/60 font-mono">
+                            <span>DEM-UI-01</span>
+                            <span>Hoje, 10:15</span>
+                        </div>
+                        <p class="font-semibold text-base-content">Migração Tailwind + DaisyUI homologada.</p>
+                        <span class="badge badge-success text-white badge-xs">Homologado por JB</span>
                     </div>
-                    <ul class="list-disc pl-4 space-y-1">
-                        <li>Clique no botão <b>☀️ Claro / 🌙 Escuro</b> no topo do Header para alternar.</li>
-                        <li>Sua escolha fica salva automaticamente no navegador (`localStorage`).</li>
-                        <li>Todos os componentes (Tabelas, Inputs, Cards HITL) adaptam o contraste instantaneamente.</li>
-                    </ul>
                 </div>
-            </div>
-
+            </aside>
         </div>
 
-    </div>
+        <!-- ABA 2: DESPACHOS & CHATBOT (CONVERSACIONAL) -->
+        <div id="tab-chat" class="tab-content flex-1 flex w-full hidden bg-base-200 p-6 overflow-hidden">
+            <div class="max-w-4xl mx-auto w-full flex-1 executive-card flex flex-col overflow-hidden">
+                <div class="p-4 border-b border-base-300 bg-base-100 flex justify-between items-center">
+                    <div>
+                        <h3 class="font-heading font-bold text-sm text-base-content">Despachos com a Secretária Executiva</h3>
+                        <p class="text-[11px] text-base-content/60 font-mono">Sessão individual autenticada via Google OAuth 2.0</p>
+                    </div>
+                    <span class="badge badge-success text-white badge-sm font-bold">Online</span>
+                </div>
 
-    <!-- Scripts de Interatividade do JDS -->
+                <div class="flex-1 p-6 overflow-y-auto space-y-4 custom-scrollbar bg-base-200/30">
+                    <div class="chat chat-start">
+                        <div class="chat-image avatar placeholder">
+                            <div class="bg-primary text-primary-content rounded-full w-8 font-mono">
+                                <span class="text-xs font-bold">J</span>
+                            </div>
+                        </div>
+                        <div class="chat-header text-xs text-base-content/60 mb-1">
+                            Jorgete Executive <time class="text-[10px] opacity-50 font-mono">10:42</time>
+                        </div>
+                        <div class="chat-bubble bg-base-100 border border-base-300 text-base-content rounded-2xl p-4 text-sm leading-relaxed shadow-tactile">
+                            Bom dia, Jader! Suas pautas de hoje já foram organizadas no dossiê executivo. Gostaria de revisar a minuta da demanda <strong>DEM-UI-05</strong> antes do envio?
+                        </div>
+                    </div>
+
+                    <div class="chat chat-end">
+                        <div class="chat-header text-xs text-base-content/60 mb-1">
+                            Você <time class="text-[10px] opacity-50 font-mono">10:43</time>
+                        </div>
+                        <div class="chat-bubble chat-bubble-primary text-white rounded-2xl p-4 text-sm leading-relaxed shadow-tactile">
+                            Sim, por favor. Certifique-se de que a barra de comandos ⌘K esteja documentada no catálogo.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Splitter Textarea -->
+                <div class="p-4 border-t border-base-300 bg-base-100">
+                    <div class="form-control w-full bg-base-200/60 p-2 rounded-2xl border border-base-300 focus-within:border-primary transition-colors">
+                        <textarea class="textarea textarea-ghost w-full resize-none focus:bg-transparent focus:outline-none min-h-[60px] text-sm" placeholder="Escreva seu despacho ou comando executivo..."></textarea>
+                        <div class="flex justify-between items-center px-2 pt-2 border-t border-base-300/50">
+                            <span class="text-xs text-base-content/50 font-mono">💡 Prompt com Harness Executive Routing</span>
+                            <button class="btn btn-primary btn-sm rounded-xl px-5 font-heading">
+                                Despachar 🚀
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA 3: TABELA DE AUDITORIA & DEMANDAS (DEMs) -->
+        <div id="tab-audit" class="tab-content flex-1 flex w-full hidden bg-base-200 p-6 overflow-y-auto custom-scrollbar">
+            <div class="max-w-5xl mx-auto w-full space-y-4">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="font-heading text-xl font-bold text-base-content">Trilha de Auditoria & Demandas de Engenharia</h3>
+                        <p class="text-xs text-base-content/60">Status oficial das demandas cadastradas no ecossistema Jorgete Cloud.</p>
+                    </div>
+                    <button class="btn btn-sm btn-outline rounded-xl">🔄 Sincronizar</button>
+                </div>
+
+                <div class="overflow-x-auto border border-base-300 rounded-2xl shadow-tactile bg-base-100">
+                    <table class="table table-zebra w-full">
+                        <thead class="bg-base-200 text-xs text-base-content/70 uppercase font-bold font-mono">
+                            <tr>
+                                <th>ID</th>
+                                <th>Demanda de Engenharia</th>
+                                <th>Módulo</th>
+                                <th>Status</th>
+                                <th class="text-right">Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-xs">
+                            <tr>
+                                <td class="font-mono font-bold text-primary">DEM-UI-01</td>
+                                <td class="font-semibold">Migração do JDS para Tailwind CSS + DaisyUI</td>
+                                <td><code>jorgete-ui</code></td>
+                                <td><span class="badge badge-success text-white badge-sm font-bold">✅ Concluído</span></td>
+                                <td class="text-right"><button class="btn btn-ghost btn-xs text-primary font-bold">Ver Minuta</button></td>
+                            </tr>
+                            <tr>
+                                <td class="font-mono font-bold text-primary">DEM-UI-05</td>
+                                <td class="font-semibold">Identidade Visual Autoral (Tipografia & Micro-Bordas)</td>
+                                <td><code>jorgete-ui</code></td>
+                                <td><span class="badge badge-success text-white badge-sm font-bold">✅ Concluído</span></td>
+                                <td class="text-right"><button class="btn btn-ghost btn-xs text-primary font-bold">Ver Minuta</button></td>
+                            </tr>
+                            <tr>
+                                <td class="font-mono font-bold text-primary">DEM-UI-06</td>
+                                <td class="font-semibold">Barra de Comandos Executivos com Suporte a ⌘K</td>
+                                <td><code>jorgete-ui</code></td>
+                                <td><span class="badge badge-success text-white badge-sm font-bold">✅ Concluído</span></td>
+                                <td class="text-right"><button class="btn btn-ghost btn-xs text-primary font-bold">Ver Minuta</button></td>
+                            </tr>
+                            <tr>
+                                <td class="font-mono font-bold text-primary">DEM-UI-07</td>
+                                <td class="font-semibold">Estação de Trabalho Executiva e Dossiê no Protótipo</td>
+                                <td><code>jorgete-ui</code></td>
+                                <td><span class="badge badge-success text-white badge-sm font-bold">✅ Concluído</span></td>
+                                <td class="text-right"><button class="btn btn-ghost btn-xs text-primary font-bold">Ver Minuta</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPTS JS -->
     <script src="../js/unified-header.js"></script>
     <script src="../js/hitl-card.js"></script>
+    <script src="../js/command-bar.js"></script>
+    <script>
+        // Inicializar comportamento dos cards HITL
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof initHitlCards === 'function') {
+                initHitlCards();
+            }
+        });
+
+        function switchModule(moduleName) {
+            document.getElementById('current-subsystem').innerText = moduleName;
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+
+            document.querySelectorAll('.tab').forEach(el => {
+                el.classList.remove('tab-active', 'bg-base-100', 'text-primary', 'shadow-xs');
+                el.classList.add('text-base-content/70');
+            });
+
+            const activeBtn = document.getElementById('btn-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.add('tab-active', 'bg-base-100', 'text-primary', 'shadow-xs');
+                activeBtn.classList.remove('text-base-content/70');
+            }
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar-governance');
+            if (sidebar) {
+                sidebar.classList.toggle('hidden');
+            }
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'jorgete-dark' ? 'jorgete' : 'jorgete-dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('jorgete-theme', next);
+            updateThemeIcons(next);
+        }
+
+        function updateThemeIcons(theme) {
+            const sun = document.getElementById('theme-icon-sun');
+            const moon = document.getElementById('theme-icon-moon');
+            if (theme === 'jorgete-dark') {
+                sun?.classList.remove('hidden');
+                moon?.classList.add('hidden');
+            } else {
+                sun?.classList.add('hidden');
+                moon?.classList.remove('hidden');
+            }
+        }
+
+        // Listener para comandos da Command Bar
+        window.addEventListener('jorgete-command-selected', (e) => {
+            console.log('Comando Executivo Selecionado:', e.detail.command);
+            if (e.detail.command === 'nova-pauta') {
+                switchTab('tab-dossier');
+            } else if (e.detail.command === 'minuta-email') {
+                switchTab('tab-chat');
+            }
+        });
+    </script>
 </body>
 </html>

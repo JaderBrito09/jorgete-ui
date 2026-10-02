@@ -1,6 +1,8 @@
-# Jorgete Design System (`jorgete-ui`) — v1.2.0
+# Jorgete Design System (`jorgete-ui`) — v2.0.0
 
-Biblioteca central de tokens visuais, layout unificado (Header, Sidebar, Tabs), componentes interativos (Botões, Tabelas, Dropdowns) e governança Human-in-the-Loop (Cards HITL com suporte a temas Light e Dark) para todo o ecossistema **Jorgete**.
+Biblioteca central de tokens visuais, layout unificado (Header, Sidebar, Tabs), componentes interativos (Botões, Tabelas, Dropdowns, Chat Bubbles) e governança Human-in-the-Loop (Cards HITL com suporte a temas Light e Dark) para todo o ecossistema **Jorgete**.
+
+A partir da versão **v2.0.0**, o `jorgete-ui` utiliza arquitetura baseada em **Tailwind CSS + DaisyUI**, distribuindo um bundle compilado e minificado em `css/jorgete-ui.min.css` com contratos estritos catalogados em `docs/UI_CATALOG.md`.
 
 ---
 
@@ -8,17 +10,22 @@ Biblioteca central de tokens visuais, layout unificado (Header, Sidebar, Tabs), 
 
 ```text
 jorgete-ui/
-├── docs/
-│   └── DESIGN_SYSTEM.md        # Especificação técnica completa v1.2.0
 ├── css/
-│   ├── tokens.css              # Variáveis CSS (Cores, Fontes, Margens, Light/Dark)
-│   ├── buttons.css             # 4 Padrões de Botões (Primary, Secondary, Success, Critical)
-│   └── components.css          # Header, Sidebar, Dropdowns, Tabs, Tables, HITL Cards
+│   └── jorgete-ui.min.css      # Bundle CSS compilado e minificado (Tailwind + DaisyUI)
+├── src/
+│   └── input.css               # Diretivas Tailwind e utilitários de camadas (@layer)
+├── docs/
+│   ├── DESIGN_SYSTEM.md        # Especificação técnica completa de arquitetura e UI v2.0
+│   ├── UI_CATALOG.md           # Catálogo oficial de snippets e componentes para IA/Devs
+│   ├── MODELO_DADOS_POSTGRES.md# Especificação de Schemas Postgres 17 e integração de UI
+│   └── BACKLOG.md              # Registro das Demandas de Engenharia (DEMs)
 ├── js/
-│   ├── unified-header.js       # Componente Web do Header com alternador Dark/Light
-│   └── hitl-card.js            # Comportamento interativo dos Rascunhos HITL
-└── prototype/
-    └── index.html              # Protótipo piloto interativo completo
+│   ├── unified-header.js       # Web Component <jorgete-header> com suporte a temas e SSO
+│   └── hitl-card.js            # Lógica interativa para cartões de governança HITL
+├── prototype/
+│   └── index.html              # Protótipo piloto interativo completo
+├── tailwind.config.js          # Definição dos temas `jorgete` e `jorgete-dark`
+└── package.json                # Dependências de compilação e scripts de build
 ```
 
 ---
@@ -26,24 +33,29 @@ jorgete-ui/
 ## 🚀 Como Usar em um Subsistema
 
 ### 1. Adicionar como Git Submodule
-Na raiz do subsistema (`Secretaria_site`, `Secretaria_slides`, `Secretaria_google`):
+Na raiz do subsistema (`secretaria_site`, `secretaria_studio`, `jorgete-chat`, `jorgete-google`):
 
 ```bash
 git submodule add https://github.com/JaderBrito09/jorgete-ui.git static/shared/ui
 ```
 
-### 2. Importar os Arquivos no HTML
+### 2. Importar o Bundle CSS e Componentes no HTML
 ```html
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="light">
+<html lang="pt-BR" data-theme="jorgete">
 <head>
-    <link rel="stylesheet" href="/static/shared/ui/css/tokens.css">
-    <link rel="stylesheet" href="/static/shared/ui/css/buttons.css">
-    <link rel="stylesheet" href="/static/shared/ui/css/components.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/shared/ui/css/jorgete-ui.min.css">
 </head>
-<body>
+<body class="bg-base-200 text-base-content min-h-screen font-sans">
 
-    <jorgete-header subsystem="Nome do Subssistema"></jorgete-header>
+    <!-- Header Unificado Web Component -->
+    <jorgete-header subsystem="Studio Web" user-name="Jader Brito" user-email="jader@jorgete.cloud"></jorgete-header>
+
+    <main class="p-6">
+        <!-- Conteúdo do Subsistema -->
+    </main>
 
     <script src="/static/shared/ui/js/unified-header.js"></script>
     <script src="/static/shared/ui/js/hitl-card.js"></script>
@@ -53,13 +65,36 @@ git submodule add https://github.com/JaderBrito09/jorgete-ui.git static/shared/u
 
 ---
 
-## 🎨 Cores e Ações Principais
-* **Primário (Gradiente Safira):** `btn-primary` (Ação principal da tela)
-* **Secundário (Neutro Slate):** `btn-secondary` (Navegação secundária, voltar, fechar)
-* **Sucesso (Esmeralda):** `btn-success` (Aprovação, salvamento com sucesso)
-* **Crítico (Urgente / Rose):** `btn-critical` (Exclusão, reprovação)
+## 🎨 Cores e Ações Principais (Classes DaisyUI Semânticas)
+
+* **Primário (Safira Executivo `#1e3a8a`):** `btn btn-primary` (Ação principal da tela)
+* **Secundário (Neutro Slate `#334155`):** `btn btn-secondary btn-outline` (Navegação secundária, voltar, fechar)
+* **Sucesso (Esmeralda Governança `#059669`):** `btn btn-success` (Aprovação, salvamento concluído)
+* **Crítico / Erro (Rose Alerta `#dc2626`):** `btn btn-error` (Exclusão, reprovação, ações irreversíveis)
 
 ---
 
 ## 🌙 Suporte ao Tema Dark/Light
-O tema responde ao atributo `data-theme="dark"` ou `data-theme="light"` na tag `<html>` e persiste a escolha no `localStorage`.
+
+O design system possui dois temas configurados via DaisyUI:
+- **Tema Claro:** `data-theme="jorgete"` (Fundo Slate-50, cards brancos, bordas Slate-200)
+- **Tema Escuro:** `data-theme="jorgete-dark"` (Fundo Slate-950, cards Slate-900, bordas Slate-800)
+
+A persistência do tema é armazenada na chave `jorgete-theme` do `localStorage`.
+
+---
+
+## 🛠️ Desenvolvimento & Compilação
+
+Para compilar ou acompanhar alterações nos estilos:
+
+```bash
+# Instalar dependências
+npm install
+
+# Compilar CSS minificado para produção
+npm run build
+
+# Executar Tailwind em modo watch (desenvolvimento contínuo)
+npm run watch
+```

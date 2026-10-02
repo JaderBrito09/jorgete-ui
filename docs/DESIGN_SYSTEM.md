@@ -1,101 +1,104 @@
-# Jorgete Design System (JDS) — Especificação Completa v1.2
+# Jorgete Design System (JDS) — Especificação Completa v2.0
 
-O **Jorgete Design System (JDS)** é a especificação unificada de UI/UX para todo o ecossistema Jorgete (`Secretaria Google`, `Secretaria Slides`, `Secretaria Site`, `Jorgete Studio`, etc.). Ele engloba desde a tipografia e botões até a navegação por sidebar, menus dropdown e a governança Human-in-the-Loop (HITL).
+O **Jorgete Design System (JDS v2.0)** é a especificação arquitetural unificada de UI/UX para todo o ecossistema Jorgete (`jorgete_site`, `jorgete_studio`, `jorgete-google`, `jorgete-chat`, etc.). 
+
+Nesta versão v2.0, toda a camada de estilização é alimentada pelo **Tailwind CSS + DaisyUI**, empacotada no arquivo compilado **`css/jorgete-ui.min.css`** (66 KB) e catalogada em **`docs/UI_CATALOG.md`**.
 
 ---
 
-## 1. Diretrizes Globais & Filosofia
+## 1. Diretrizes Globais & Filosofia Visualmente Estrita
 
 1. **Clean UI & Business-First:** Foco absoluto na produtividade e clareza de gestores e analistas. Eliminado qualquer excesso decorativo ou ruído visual.
-2. **Linguagem Humana (Zero IA na UI):** A interface utiliza estritamente termos de negócio. Termos de engenharia como "payload", "LLM", "prompt", "chunk", "agente" ou "vector DB" são estritamente proibidos. Use: *"Rascunho"*, *"Sugestão"*, *"Minuta"*, *"Processar"*, *"Consultar Acervo"*.
-3. **Light Theme de Alto Contraste:** Padrão claro com fundo Slate-50 (`#f8fafc`) e superfícies brancas com bordas Slate-200 (`#e2e8f0`).
-4. **Arquivos Modulares (`< 1000 linhas`):** A estrutura de folhas de estilo e scripts é dividida para garantir facilidade de manutenção sem inflar os subsistemas.
+2. **Linguagem Humana (Zero IA na UI):** A interface utiliza estritamente termos de negócio. Termos de engenharia como *"payload"*, *"LLM"*, *"prompt"*, *"chunk"*, *"agente"* ou *"vector DB"* são estritamente proibidos em rótulos do usuário. Use: *"Rascunho"*, *"Sugestão"*, *"Minuta"*, *"Processar"*, *"Consultar Acervo"*.
+3. **Temas Centralizados (`data-theme`):**
+   * **Light (`jorgete`):** Fundo Slate-50 (`#f8fafc`), superfícies brancas (`#ffffff`), bordas Slate-200 (`#e2e8f0`).
+   * **Dark (`jorgete-dark`):** Fundo Slate-950 (`#020617`), superfícies Slate-900 (`#0f172a`), bordas Slate-800 (`#1e293b`).
+4. **Contrato Rígido para IAs:** Todas as IAs geradoras de código devem utilizar **exclusivamente** os componentes e classes semânticas do DaisyUI definidos em `docs/UI_CATALOG.md`. É proibidíssimo criar CSS inline (`style="..."`) ou definir cores hexadecimais avulsas no HTML.
 
 ---
 
-## 2. Tipografia, Fontes & Hierarquia de Títulos
+## 2. Catálogo Estruturado de Componentes Padronizados
 
-* **Família de Fonte:** `Inter`, `-apple-system`, `BlinkMacSystemFont`, `system-ui`, `sans-serif`.
+### A. Unified Header (Cabeçalho Unificado)
+* **Especificação:** Altura fixa `64px` (`h-16`), `sticky top-0`, `z-index: 50`, borda inferior `border-b border-base-300`.
+* **Conteúdo:**
+  * Símbolo gradiente "J" + Nome "Jorgete AI" clicável direcionando para o Hub (`www.jorgete.cloud`).
+  * Dropdown/Badge do subsistema ativo ("Studio Web", "Jorgete Chat", "Secretária GWS", "Portal Hub").
+  * Botão discreto de alternância do Painel Lateral (`toggleSidebar()`).
+  * Botão de alternância do Tema Light/Dark (`toggleTheme()`).
+  * Perfil SSO do Usuário Logado (Foto/Iniciais e e-mail via Google SSO).
 
-### Hierarquia de Títulos e Textos
+### B. Sidebar Retrátil & Painéis Laterais
+* **Especificação:** Largura padrão `384px` (`w-96`) ou `320px` (`w-80`), `sidebar-transition` (`transition-all duration-300 ease-in-out`).
+* **Regra do Canvas 100% Dinâmico:** O fechamento da sidebar oculta o elemento (`hidden`), expandindo a área central do Canvas para 100% da viewport.
+* **Proibição de Flutuantes:** É estritamente proibido incluir chevrons ou botões flutuantes soltos sobre a área do Canvas. O acionamento é feito unicamente no Unified Header ou no botão 'X' do topo do painel.
 
-| Elemento | Tamanho | Peso | Line Height | Cor | Uso Principal |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Título Hero / H1** | `2.25rem - 3rem` (36px-48px) | Extrabold (`800`) | `1.15` | `text-slate-900` / Gradiente JDS | Título principal da aplicação/hub |
-| **Título de Seção / H2** | `1.25rem - 1.5rem` (20px-24px) | Bold (`700`) | `1.25` | `text-slate-900` | Cabeçalhos de painéis e tabelas |
-| **Subtítulo / Card / H3** | `1rem - 1.125rem` (16px-18px) | Bold (`700`) | `1.35` | `text-slate-800` | Títulos de cards e modais |
-| **Texto de Corpo (Body)** | `0.875rem` (14px) | Normal (`400`) / Medium (`500`) | `1.5` | `text-slate-600` | Descrições, parágrafos, conteúdos |
-| **Subtexto / Muted** | `0.8125rem` (13px) | Regular (`400`) | `1.4` | `text-slate-400` / `500` | Metadados, datas, IDs de demandas |
-| **Rótulo / Label Microcopy**| `0.75rem` (12px) | Bold (`700`) | `1.0` | `text-slate-500` Uppercase | Legendas de inputs, headers de tabelas |
+### C. Input de Chat / Splitter Textarea (`jorgete-google` e `jorgete-chat`)
+* **Especificação:** Container `rounded-2xl`, borda `border-base-300`, altura mínima `102px` a `112px`.
+* **Recursos Internos:**
+  * Textarea sem bordas próprias (`textarea-ghost`), redimensionamento desativado (`resize-none`).
+  * Rodapé com indicador discreto (*"💡 Suporta Markdown"* ou modelo ativo) + Botão de Envio com destaque Safira (`btn-primary`).
+  * Animação de foco com borda destacada em Safira/Azul Real.
 
----
+### D. Card HITL Universal (Human-In-The-Loop)
+* **Especificação:** Container `card bg-base-100 border border-base-300 shadow-md p-5 rounded-2xl`.
+* **Componentes Obrigatórios:**
+  1. **Badges de Estado:** Rascunho (`badge-warning`), Aprovado (`badge-success`), Rejeitado (`badge-error`).
+  2. **Identificador da Demanda:** Código em fonte mono espaçada (ex: `DEM-102`).
+  3. **Edição In-Place:** Permite alterar texto diretamente na tela sem redirecionamentos.
+  4. **Gaveta de Comentários & Trava de Segurança:** Permite registrar ressalvas do analista. **Existindo comentário pendente, o botão de aprovação é desativado ou sinalizado para ajuste.**
+  5. **Botoeira de Governança:** `[✏️ Editar]`, `[🗑️ Rejeitar]` (Rose) e `[✅ Aprovar Minuta]` (Esmeralda).
 
-## 3. Paleta de Cores e Tokens Visuais
+### E. Balões de Mensagem de Chat (`Chat Bubbles`)
+* **Especificação:** Padrão DaisyUI `chat chat-start` (Assistente) e `chat chat-end` (Usuário).
+* **Balão do Assistente:** Fundo `bg-base-200`, borda `border-base-300`, texto do corpo `text-base-content`, avatar com iniciais "J".
+* **Balão do Usuário:** Fundo `chat-bubble-primary` (Safira), texto branco, avatar com foto/iniciais do SSO.
 
-### Ações (4 Padrões Estritos)
-1. **Primário (Gradiente Safira Executivo):** `linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)` — Ação principal da página.
-2. **Secundário (Neutro Slate):** Fundo `#f1f5f9`, Texto `#334155`, Borda `#cbd5e1` — Cancelamentos, filtros, navegação secundária.
-3. **Sucesso (Esmeralda Governança):** Fundo `#059669` com texto branco — Aprovações, confirmações e salvamentos com sucesso.
-4. **Crítico (Urgente / Rose):** Fundo `#dc2626` com texto branco — Reprovações, exclusões e alertas irreversíveis.
+### F. Navegação por Abas (`Tabs`)
+* **Especificação:** Container `tabs tabs-boxed bg-base-200 p-1.5 rounded-xl border border-base-300`.
+* **Aba Ativa:** `tab-active bg-base-100 text-primary font-bold shadow-xs rounded-lg`.
+* **Aba Inativa:** `text-base-content/70 font-semibold hover:text-base-content`.
 
----
+### G. TableContainer (Tabelas de Auditoria e Dados)
+* **Especificação:** Container `border border-base-300 rounded-2xl shadow-sm bg-base-100 overflow-x-auto`.
+* **Estilização:** Tabela com linhas alternadas (`table table-zebra`), header sticky `thead bg-base-200 uppercase font-bold text-xs`, células alinhadas.
 
-## 4. Componentes de Interface
-
-### A. Unified Header (Topo da Aplicação)
-* **Altura:** `64px` fixa, `sticky top-0`, `z-index: 50`.
-* **Conteúdo:** Símbolo "J" gradiente + Nome "Jorgete AI" + Divisor vertical + Badge do subsistema atual + Perfil Google SSO (foto/iniciais e e-mail).
-
-### B. Sidebar / Navegação Lateral (Para Módulos de Painel)
-* **Largura:** `240px` (desktop), retrátil em telas menores.
-* **Item Inativo:** Fundo transparente, texto Slate-600, ícone Slate-400, hover `bg-slate-100`.
-* **Item Ativo:** Fundo `bg-blue-50`, texto `text-blue-900` font-bold, borda lateral direita `border-r-4 border-blue-600`, ícone `text-blue-600`.
-
-### C. Menus Dropdown e Flyouts
-* **Container:** Fundo branco, `border border-slate-200`, cantos `rounded-2xl`, sombra `shadow-xl`, padding `p-2`.
-* **Opções Internas:** Padding `px-3 py-2`, `rounded-xl`, `hover:bg-slate-100`, texto `text-xs font-semibold`.
-
-### D. Navegação em Abas (Tabs)
-* **Container:** Fundo `#f1f5f9`, `p-1`, `rounded-xl`, borda `#e2e8f0`.
-* **Aba Ativa:** Fundo branco, texto Azul Safira (`#1e3a8a`), sombra leve `shadow-sm`.
-
-### E. TableContainer (Tabelas)
-* **Container:** Cantos `rounded-xl`, `border border-slate-200`, `overflow-hidden`.
-* **Header (`thead`):** `position: sticky; top: 0;`, fundo `#f8fafc`, texto Slate-500 em caixa alta (`uppercase text-xs font-bold`).
-* **Linhas (`tr`):** Borda inferior `#e2e8f0`, efeito hover `bg-slate-50`.
-
-### F. Card HITL Universal (Human-In-The-Loop)
-* **Badge de Status:** Rascunho (`amber`), Aprovado (`emerald`), Rejeitado (`rose`).
-* **Edição Direta:** Botão `[✏️ Editar Texto]` alterna a visualização para modo de edição WYSIWYG/Textarea na própria tela.
-* **Gaveta de Comentários & Trava de Segurança:** Permite adicionar anotações para refinamento. **Se houver 1 ou mais comentários pendentes, o botão de Aprovação/Envio é desativado.**
-* **Formatação:** Preservação de quebras de linha (`white-space: pre-wrap`).
-* **Links:** Todos os links externos abrem obrigatoriamente com `target="_blank"`.
-
-### G. Splitter Inputs (Prompts & Entradas)
-* **Dimensão:** `min-height: 102px` / `height: 112px`, `rounded-lg`, borda Slate-200 com foco em Azul `#3b82f6`.
-
-### H. Sidebars Retráteis & Painéis Laterais (Padrão jorgete-google v1.2)
-* **Acionamento no Header:** Botão discreto de alternância no Unified Header (`button onclick="toggleSidePanel()"`) com ícone `columns` ou `layers`.
-* **Botão 'X' no Cabeçalho da Sidebar:** Todo painel lateral retrátil possui um botão de fechar no topo com ícone `X` (`button onclick="toggleSidePanel()"`).
-* **Comportamento de Transição:** O painel alterna sua visibilidade (`hidden` / `w-80` <-> `w-0` com `transition-all duration-300`), permitindo que a área útil do Canvas e do Chat se expanda suavemente e ocupe 100% da viewport central.
-* **Proibição de Elementos Flutuantes:** É estritamente proibido colocar botões soltos ou chevrons flutuantes no meio da área central do Canvas para recolher painéis.
+### H. Botões Oficiais (4 Padrões Rígidos)
+1. **Primário:** `btn btn-primary` (Safira Executivo `#1e3a8a`) — Ação principal da tela.
+2. **Secundário:** `btn btn-secondary btn-outline` (Slate `#334155`) — Navegação, cancelar, voltar.
+3. **Sucesso:** `btn btn-success` (Esmeralda Governança `#059669`) — Aprovações e confirmações.
+4. **Erro / Crítico:** `btn btn-error` (Rose Alerta `#dc2626`) — Exclusões e rejeições.
 
 ---
 
-## 5. Estrutura de Arquivos Central (`jorgete-ui`)
+## 3. Matriz de Mapeamento dos Componentes
 
-```text
-jorgete-ui/
-├── docs/
-│   └── DESIGN_SYSTEM.md     # Esta especificação completa
-├── css/
-│   ├── tokens.css           # Tokens de cores, fontes, sombras e tamanhos
-│   ├── buttons.css          # Padrões das 4 famílias de botões
-│   └── components.css       # Header, Sidebar, Dropdowns, Tabs, Tables, HITL Cards
-├── js/
-│   ├── unified-header.js    # Componente Web do Cabeçalho Unificado
-│   ├── sidebar-menu.js      # Lógica de controle de Sidebar e Dropdowns
-│   └── hitl-card.js         # Comportamento interativo do Card HITL
-├── prototype/
-│   └── index.html           # Protótipo interativo completo
+| Componente | Padrão `jorgete-ui` v2.0 | Classe / Elemento DaisyUI | Finalidade |
+| :--- | :--- | :--- | :--- |
+| **Header** | Topo Unificado | `<header class="navbar bg-base-100 border-b border-base-300">` | Navegação e perfil global |
+| **Sidebar** | Painel Contextual | `<aside class="w-96 bg-base-100 border-l sidebar-transition">` | Formulários e ações do passo |
+| **Input Chat** | Splitter Textarea | `<div class="form-control rounded-2xl border"> <textarea>` | Prompts e comandos |
+| **Card HITL** | Governança Human-In-The-Loop | `<div class="card bg-base-100 border p-5">` | Aprovação e revisão de IA |
+| **Chat Bubbles** | Mensagens de Diálogo | `<div class="chat chat-start"> / <div class="chat chat-end">` | Conversação do chatbot/assistente |
+| **Tabs** | Abas de Navegação | `<div class="tabs tabs-boxed bg-base-200">` | Troca de telas no módulo |
+| **Tables** | Tabela de Auditoria | `<table class="table table-zebra w-full">` | Exibição de demandas e logs |
+| **Botões** | 4 Padrões de Ação | `btn-primary`, `btn-secondary`, `btn-success`, `btn-error` | Interações de ação |
+
+---
+
+## 4. Como Importar nos Subsistemas
+
+Em qualquer arquivo HTML/Template dos subsistemas Python (`secretaria_site`, `secretaria_studio`, `jorgete-chat`, `jorgete-google`), inclua uma única linha na tag `<head>`:
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="jorgete">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/shared/ui/css/jorgete-ui.min.css">
+</head>
+<body class="bg-base-200 text-base-content min-h-screen font-sans">
+    ...
+</body>
+</html>
 ```
